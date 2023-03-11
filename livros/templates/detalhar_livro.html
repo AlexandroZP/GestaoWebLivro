@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block 'titulo' %}Detalhes{% endblock %}
+
+{% block 'conteudo' %}
+    <div class="container">
+        <h1>Detalhes</h1>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">{{ nome }}</th>
+                <th scope="col">{{ finalizado }}</th>
+                <th scope="col">{{ resenha }}</th>
+                <th scope="col"><a class="btn btn-warning">Editar</a></th>
+                <th scope="col"><a class="btn btn-danger">Excluir</a></th>
+              </tr>
+            </thead>         
+        <button class="btn btn-secondary">Voltar</button>
+    </div>  
+{% endblock %}
