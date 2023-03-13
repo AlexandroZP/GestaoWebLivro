@@ -2,11 +2,17 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Livro
 from django.shortcuts import redirect
-# Create your views here.
-def detalhar_livro(request):
-    livro = Livro.objects.filter(id=1)
+
+
+def home(request):
+    livros = Livro.objects.all()
+    return render(request, 'home.html', {'livros':livros})
+
+
+def detalhar_livro(request,id):
+    livro = Livro.objects.get(id = id)
     print(livro)
-    return render(request, 'detalhar_livro.html', {'nome':livro[0].nome,'finalizado':livro[0].finalizado, 'resenha':livro[0].resenha})
+    return render(request, 'detalhar_livro.html', {'livro':livro})
 
 
 def criar_livro(request):

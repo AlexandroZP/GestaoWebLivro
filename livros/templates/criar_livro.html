@@ -30,7 +30,7 @@
             </div>
             <div class="col-md">
                 <br>
-                <h1>Criar um novo livro</h1>
+                <h1>Cadastrar um novo livro</h1>
                 <hr>
                 <form action="{% url 'criar_livro' %}" method="POST">{% csrf_token %}
                     <br>
@@ -46,8 +46,8 @@
                     <textarea class="form-control" type="text" name="resenha" id="resenha" placeholder="O que Achou do livro ? Máx(450)"></textarea>
                     <br>
                     <br>
-                    <input class=" btn btn btn-secondary btn-lg" type="submit" value="Cadastrar ">
-                    <input type="button" class="btn btn-primary btn-lg" value="Página inicial">
+                    <input class=" btn btn btn-secondary btn-lg" type="submit" value="Cadastrar">
+                    <a href="{% url 'home' %}" class="btn btn-primary btn-lg">Página inicial</a>
                 </form>
             </div>
             <div class="col-md-3"></div>
