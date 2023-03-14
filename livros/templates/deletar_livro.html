@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block 'conteudo' %} 
+
+<h1>O livro {{ n_livro }} foi deletado com sucesso</h1>
+    <a href="{% url 'home' %}" type="button" class="btn btn-secondary">Voltar a pagina inicial</a>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Livro
 from django.shortcuts import redirect
@@ -47,5 +47,15 @@ def criar_livro(request):
             return redirect('/livros/criar_livro/?status=3')
 
 
+def deletar_livro(request, id):
+    livro = Livro.objects.get(id = id)
+    n_livro = livro.nome
+    livro.delete()
+    return render(request, 'deletar_livro.html', {'n_livro':n_livro})
+
+
+
+
+    
 
         
