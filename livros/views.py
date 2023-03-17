@@ -6,12 +6,14 @@ from django.shortcuts import redirect
 
 def home(request):
     livros = Livro.objects.all()
-    return render(request, 'home.html', {'livros':livros})
+    status = request.GET.get('status')
+    deletar = request.GET.get('deletar')
+    print(deletar)
+    return render(request, 'home.html', {'livros':livros, 'status':status, 'deletar':deletar})
 
 
-def detalhar_livro(request,id):
+def detalhar_livro(request, id):
     livro = Livro.objects.get(id = id)
-    print(livro)
     return render(request, 'detalhar_livro.html', {'livro':livro})
 
 
@@ -47,11 +49,21 @@ def criar_livro(request):
             return redirect('/livros/criar_livro/?status=3')
 
 
-def deletar_livro(request, id):
+def deletar_livro(request, come_from, id):
     livro = Livro.objects.get(id = id)
-    n_livro = livro.nome
-    livro.delete()
-    return render(request, 'deletar_livro.html', {'n_livro':n_livro})
+    if come_from == 1:
+        return render(request, 'deletar_livro.html', {'livro':livro})
+    elif come_from == 2:
+        livro.delete()
+        return redirect('/livros/home/?status=0')
+    elif come_from == 3:
+        return redirect('/livros/home/')
+
+
+
+        
+
+    
 
 
 

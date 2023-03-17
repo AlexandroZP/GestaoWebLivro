@@ -2,6 +2,7 @@
 
 {% block 'conteudo' %} 
 
-<h1>O livro {{ n_livro }} foi deletado com sucesso</h1>
-    <a href="{% url 'home' %}" type="button" class="btn btn-secondary">Voltar a pagina inicial</a>
+<h1>Tem certeza que deseja deletar {{ livro.nome }} de sua lista ?</h1>
+    <a href="{% url 'deletar_livro'  livro.id 3 %}" type="button" class="btn btn-primary">Cancelar</a>
+    <a href="{% url 'deletar_livro'  livro.id 2 %}" type="button" class="btn btn-danger">Sim</a>
 {% endblock %}
