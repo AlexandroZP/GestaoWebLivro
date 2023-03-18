@@ -7,9 +7,7 @@ from django.shortcuts import redirect
 def home(request):
     livros = Livro.objects.all()
     status = request.GET.get('status')
-    deletar = request.GET.get('deletar')
-    print(deletar)
-    return render(request, 'home.html', {'livros':livros, 'status':status, 'deletar':deletar})
+    return render(request, 'home.html', {'livros':livros, 'status':status})
 
 
 def detalhar_livro(request, id):
@@ -59,6 +57,38 @@ def deletar_livro(request, come_from, id):
     elif come_from == 3:
         return redirect('/livros/home/')
 
+
+def editar_livro(request, id):
+    livro = Livro.objects.get(id = id)
+
+
+    if request.method == 'GET':
+        status = request.GET.get('status')
+        return render(request, 'editar_livro.html', {'status':status, 'livro':livro})
+    
+    elif request.method == 'POST':
+        nome = request.POST.get('nome')
+        finalizado = request.POST.get('finalizado')
+        resenha = request.POST.get('resenha')
+        
+        if len(nome.strip()) == 0 or len(resenha.strip()) == 0:
+            return redirect(f'/livros/editar_livro/{livro.id}?status=1', {'livro':livro})
+        
+
+        if finalizado == "on":
+            finalizado = True
+        else:
+            finalizado = False
+
+
+        try:       
+            livro.nome = nome
+            livro.resenha = resenha
+            livro.finalizado = finalizado 
+            livro.save()
+            return redirect(f'/livros/editar_livro/{livro.id}?status=0')
+        except:
+            return redirect(f'/livros/editar_livro/{livro.id}?status=2')
 
 
         
